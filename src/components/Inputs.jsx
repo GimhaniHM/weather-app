@@ -1,18 +1,22 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { UilSearch, UilLocationPoint } from '@iconscout/react-unicons'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function Inputs({setQuery, units, setUnits}) {
+function Inputs({ setQuery, units, setUnits }) {
     const [city, setCity] = useState('');
 
     const handleSearchClick = () => {
         if (city !== '') {
-            setQuery({q: city})
+            setQuery({ q: city })
         }
     };
 
     const handleLocationClick = () => {
         if (navigator.geolocation) {
+            toast.info("Fetching users location.");
             navigator.geolocation.getCurrentPosition((position) => {
+                toast.success("Location fetched!");
                 let lat = position.coords.latitude;
                 let lon = position.coords.longitude;
 
@@ -27,7 +31,7 @@ function Inputs({setQuery, units, setUnits}) {
     const handleUnitsChange = (e) => {
         const selectedUnit = e.currentTarget.name;
 
-        if(units !== selectedUnit) {
+        if (units !== selectedUnit) {
             setUnits(selectedUnit);
         }
     }
@@ -36,8 +40,8 @@ function Inputs({setQuery, units, setUnits}) {
         <div className='flex flex-row justify-center my-6'>
             <div className='flex flex-row w-3/4 items-center justify-center space-x-4'>
                 <input
-                value={city}
-                onChange={(e) => setCity(e.currentTarget.value)}
+                    value={city}
+                    onChange={(e) => setCity(e.currentTarget.value)}
                     type="text"
                     placeholder='search for city'
                     className='text-xl font-light p-2 w-full shadow-xl focus:outline-none first-letter:capitalize placeholder:lowercase'
