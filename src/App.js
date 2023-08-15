@@ -5,8 +5,16 @@ import Inputs from './components/Inputs.jsx';
 import TimeAndLocation from './components/TimeAndLocation.jsx'
 import TemperatureDetails from './components/TemperatureDetails.jsx'
 import Forecast from './components/Forecast.jsx'
+//import getWeatherData from './services/WeatherService';
+import getFormattedWeatherData from './services/WeatherService';
 
 function App() {
+
+  const fetchData = async () =>{
+    const data = await getFormattedWeatherData({q: "london"});
+    console.log(data); 
+  } 
+  fetchData();
   return (
   <div className="mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br from-cyan-700 to-blue-700 h-fit shadow-xl shadow-gray-400">
     <TopButton />
