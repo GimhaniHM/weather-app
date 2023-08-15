@@ -1,7 +1,10 @@
 import React from 'react'
+import { iconUrlFFromCode } from '../services/WeatherService'
 
-function Forecast(props) {
-    const {title} = props;
+function Forecast({ title, items }) {
+    //const {title} = props;
+    console.log(items);
+
     return (
         <div>
             <div className='flex items-center justify-start my-6'>
@@ -10,50 +13,17 @@ function Forecast(props) {
             <hr className='my-2' />
 
             <div className='flex flex-row items-center justify-between text-white'>
-                <div className='flex flex-col items-center justify-center'>
-                    <p className='font-light text-sm'>04:30 PM</p>
-                    <img
-                        src="http://openweathermap.org/img/wn/01d@2x.png"
-                        alt=""
-                        className='w-12 my-1'
-                    />
-                </div>
-
-                <div className='flex flex-col items-center justify-center'>
-                    <p className='font-light text-sm'>04:30 PM</p>
-                    <img
-                        src="http://openweathermap.org/img/wn/01d@2x.png"
-                        alt=""
-                        className='w-12 my-1'
-                    />
-                </div>
-
-                <div className='flex flex-col items-center justify-center'>
-                    <p className='font-light text-sm'>04:30 PM</p>
-                    <img
-                        src="http://openweathermap.org/img/wn/01d@2x.png"
-                        alt=""
-                        className='w-12 my-1'
-                    />
-                </div>
-
-                <div className='flex flex-col items-center justify-center'>
-                    <p className='font-light text-sm'>04:30 PM</p>
-                    <img
-                        src="http://openweathermap.org/img/wn/01d@2x.png"
-                        alt=""
-                        className='w-12 my-1'
-                    />
-                </div>
-
-                <div className='flex flex-col items-center justify-center'>
-                    <p className='font-light text-sm'>04:30 PM</p>
-                    <img
-                        src="http://openweathermap.org/img/wn/01d@2x.png"
-                        alt=""
-                        className='w-12 my-1'
-                    />
-                </div>
+                {items.map((item, index) => (
+                    <div className='flex flex-col items-center justify-center' key={index}>
+                        <p className='font-light text-sm'>{item.title}</p>
+                        <img
+                            src={iconUrlFFromCode(item.icon)}
+                            alt=""
+                            className='w-12 my-1'
+                        />
+                        <p className='font-medium'> {`${item.temp.toFixed()}°`} </p>
+                    </div>
+                ))}
             </div>
         </div>
     )

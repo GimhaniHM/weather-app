@@ -56,7 +56,7 @@ const formatForecastWeather = (data) => {
 
     // Extract hourly forecast data
     const hourly = list
-        .slice(0, 5 * 8) // Take the next 5 days of hourly data (8 data points per day)
+        .slice(0, 5) // Take the next 5 times of hourly data
         .map((d) => {
             return {
                 title: formatToLocalTime(d.dt, timezone, "hh:mm a"),
